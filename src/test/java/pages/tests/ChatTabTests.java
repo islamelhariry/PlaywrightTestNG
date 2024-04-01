@@ -1,6 +1,5 @@
 package pages.tests;
 
-import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -14,24 +13,19 @@ public class ChatTabTests extends EdgeTierPageTestBase {
     ChatPage chatPage;
 
     @BeforeClass
-    public void setup()
+    public void createContextAndSetupPages()
     {
-        super.setup();
+        super.setBrowserAndCreateContext();
         signInPage = new EdgeTierSignInPage(page);
         agentHomePage = new AgentHomePage(page);
         chatPage = new ChatPage(page);
     }
     @BeforeMethod
-    public void createContextAndPage() {
+    public void navigateToChatTab() {
         signInPage.navigateToEdgeTer();
         signInPage.signInAsAgent();
         agentHomePage.pressChatTab();
 
-    }
-
-    @AfterMethod
-    void closeContext() {
-        super.closeBrowser();
     }
 
     @Test
@@ -42,7 +36,7 @@ public class ChatTabTests extends EdgeTierPageTestBase {
     }
 
     @Test
-    void selectMessageInChatTest() {
+    void EndChatTest() {
         chatPage.pressEndChatButton()
                 .selectADispositionCategory()
                 .selectADispositionCode()
